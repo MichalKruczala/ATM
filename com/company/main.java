@@ -11,9 +11,7 @@ public class main {
         System.out.println("Hello in ATM online bank");
         System.out.println("-----Podaj Login i hasło-----");
 
-        User Jarek = new User("jareczek123", "ciastkonakielny");
-        User Grzes = new User("grzesiek123", "brakciasta");
-        User Michal = new User("michal123", "tylkodance");
+
         ArrayList<User> bankUsers = new ArrayList<User>();
         bankUsers.add(Jarek);
         bankUsers.add(Grzes);
