@@ -17,5 +17,6 @@ public class AuthenticotorTests {
         boolean isAuthenticated = authenticator.tryAunthenticate(new User("jarecuggyg3", "ciastkonakielnuygugy"));
         Assertions.assertFalse(isAuthenticated);
     }
+
 }
 

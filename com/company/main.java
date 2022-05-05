@@ -18,16 +18,16 @@ public class main {
         bankUsers.add(Michal);
 
         while (true) {
-            if(!TryAuthenticate(bankUsers)){
+            if (!TryAuthenticate(bankUsers)) {
                 System.out.println("podano zły login lub hasło");
                 continue;
             }
 
-            int accountbalance = 50000;
+
             System.out.print("how much money would you get?: ");
 
             int sum = scanner.nextInt();
-
+            int accountbalance = 50000;
             if (sum > 0) {
                 if (sum % 100 == 0 && sum <= accountbalance && sum > 0) {
                     System.out.println("Gratuluję wypłata poszła pomyślnie");
@@ -43,7 +43,7 @@ public class main {
             }
 
 
-            System.out.print("how much money would you get?: ");
+
 
             sum = scanner.nextInt();
 
@@ -64,18 +64,5 @@ public class main {
         }
     }
 
-    public static boolean TryAuthenticate(ArrayList<User> usersInSystem) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("podaj login: ");
-        String loginGiven = scanner.next();
-        System.out.print("podaj hasło: ");
-        String passwordGiven = scanner.next();
-        for (User e : usersInSystem) {
-            if (e.login.equals(loginGiven) && e.password.equals(passwordGiven)) {
-                return true;
-            }
-        }
 
-        return false;
-    }
 }
