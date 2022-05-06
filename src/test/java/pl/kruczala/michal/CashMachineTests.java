@@ -1,7 +1,8 @@
 package pl.kruczala.michal;
 
-import org.junit.Test;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class CashMachineTests {
     @Test
@@ -15,13 +16,26 @@ public class CashMachineTests {
     }
 
     @Test
+    public void shouldNotPayOutToMuch() {
+        CashMachine cashMachine = new CashMachine();
+        int requestedCash = 0;
+        try {
+            requestedCash= cashMachine.payOut(60000);
+        } catch (Exception e) {
+        }
+
+        Assertions.assertEquals(0,requestedCash);
+    }
+
+    @Test
     public void shouldPayOutTwice() {
         CashMachine cashMachine = new CashMachine();
         try {
             int returnedCash = cashMachine.payOut(100);
-            returnedCash = cashMachine.payOut(100);
+            int secondReturnedCash = cashMachine.payOut(100);
 
             Assertions.assertEquals(100, returnedCash);
+            Assertions.assertEquals(100, secondReturnedCash);
         } catch (Exception e) {
         }
     }
