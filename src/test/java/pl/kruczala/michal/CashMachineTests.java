@@ -20,11 +20,11 @@ public class CashMachineTests {
         CashMachine cashMachine = new CashMachine();
         int requestedCash = 0;
         try {
-            requestedCash= cashMachine.payOut(60000);
+            requestedCash = cashMachine.payOut(60000);
         } catch (Exception e) {
         }
 
-        Assertions.assertEquals(0,requestedCash);
+        Assertions.assertEquals(0, requestedCash);
     }
 
     @Test
@@ -64,5 +64,14 @@ public class CashMachineTests {
         Assertions.fail("Exception has not been thrown");
 
     }
-}
 
+    @Test
+    public void shouldNotPayOutZero() {
+        CashMachine cashMachine = new CashMachine();
+        try {
+            int returnedCash = cashMachine.payOut(0);
+            Assertions.assertEquals(0, returnedCash);
+        } catch (Exception e) {
+        }
+    }
+}

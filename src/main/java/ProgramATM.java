@@ -14,7 +14,7 @@ public class ProgramATM {
         System.out.print("podaj hasło: ");
         String passwordGiven = scanner.next();
         Authenticator authenticator = new Authenticator();
-        if(!authenticator.tryAunthenticate(new User(loginGiven,passwordGiven))){
+        if (!authenticator.tryAunthenticate(new User(loginGiven, passwordGiven))) {
             System.out.println("Wrong credentials");
             return;
         }
@@ -25,12 +25,6 @@ public class ProgramATM {
         int requestedSum = cashMachine.payOut(moneyQuantity);
         System.out.println("Successfully pay out " + requestedSum);
         System.out.println("Amount  of money on your account " + cashMachine.getAccountBalance());
-
-
     }
-
-
-
-
-    }
+}
 
