@@ -14,9 +14,11 @@ public class ProgramATM {
         System.out.print("podaj hasło: ");
         String passwordGiven = scanner.next();
         Authenticator authenticator = new Authenticator();
-        if (!authenticator.tryAunthenticate(new User(loginGiven, passwordGiven))) {
-            System.out.println("Wrong credentials");
-            return;
+
+        User user = authenticator.tryAunthenticate(loginGiven, passwordGiven );
+        if (user==null) {
+            System.out.println("------Wrong credentials------");
+            return ;
         }
         System.out.println("Hello inside ATM bank");
         CashMachine cashMachine = new CashMachine();

@@ -1,6 +1,7 @@
 package pl.kruczala.michal;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Authenticator {
 
@@ -11,14 +12,23 @@ public class Authenticator {
 
         this.usersInSystem = new ArrayList<User>();
         usersInSystem.add(new User("123", "123"));
+        usersInSystem.add(new User("admin", "admin",true));
         usersInSystem.add(new User("jareczek123", "ciastkonakielny"));
         usersInSystem.add(new User("grzesiek123", "brakciasta"));
         usersInSystem.add(new User("michal123", "tylkodance"));
 
     }
 
-    public boolean tryAunthenticate(User user) {
+    public User tryAunthenticate(String login, String password) {
 
-        return usersInSystem.contains(user);
+        Optional<User> opcjonalna =
+        usersInSystem.stream().filter(user -> user.login.equals(login) && user.password.equals(password)).findAny();
+        if (opcjonalna.isEmpty()){
+            return null;
+        }
+        User result = opcjonalna.get();
+        return  result;
+
     }
+
 }

@@ -18,6 +18,19 @@ public class User {
         public final String login;
         public final String password;
 
+    public User(String login, String password, boolean isAdmin) {
+        this.login = login;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
+
+    //to jest metoda wytwórcza,na rozmowie pytają :)
+    public static User asAdmin(String login, String password){
+        return new User(login,password,true);
+    }
+
+    public boolean isAdmin;
+
     public User(String login, String password) {
             this.login = login;
             this.password = password;

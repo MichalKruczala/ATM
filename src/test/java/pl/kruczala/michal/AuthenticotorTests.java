@@ -7,15 +7,15 @@ public class AuthenticotorTests {
     @Test
     public void shouldAuthenticateValidUser() {
         Authenticator authenticator = new Authenticator();
-        boolean isAuthenticated = authenticator.tryAunthenticate(new User("jareczek123", "ciastkonakielny"));
-        Assertions.assertTrue(isAuthenticated);
+        User isAuthenticated = authenticator.tryAunthenticate("jareczek123", "ciastkonakielny");
+        Assertions.assertNotNull(isAuthenticated);
     }
 
     @Test
     public void shouldNotAuthenticateInvalidUser() {
         Authenticator authenticator = new Authenticator();
-        boolean isAuthenticated = authenticator.tryAunthenticate(new User("jarecuggyg3", "ciastkonakielnuygugy"));
-        Assertions.assertFalse(isAuthenticated);
+        User isAuthenticated = authenticator.tryAunthenticate("jarecuggyg3", "ciastkonakielnuygugy");
+        Assertions.assertNull(isAuthenticated);
     }
 
 }

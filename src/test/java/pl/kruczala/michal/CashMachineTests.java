@@ -41,16 +41,15 @@ public class CashMachineTests {
     }
 
     @Test
-    public void shouldThrowExceptionWhenCashMachineIsEmpty() {
-        CashMachine cashMachine = new CashMachine();
-        try {
-            cashMachine.payOut(30000);
-            cashMachine.payOut(30000);
-        } catch (Exception e) {
-            return;
-        }
+    void testExpectedException()  {
 
-        Assertions.fail("Exception has not been thrown");
+        ApplicationException thrown = Assertions.assertThrows(ApplicationException.class, () -> {
+            CashMachine cashMachine = new CashMachine();
+            cashMachine.payOut(30000);
+            cashMachine.payOut(30000);
+        });
+
+        Assertions.assertEquals("Requested sum is lower than your account balance",thrown.getMessage());
     }
 
     @Test
