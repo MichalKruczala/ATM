@@ -6,42 +6,31 @@ import org.junit.jupiter.api.Test;
 
 public class CashMachineTests {
     @Test
-    public void shouldPayOut() {
+    public void shouldPayOut() throws Exception {
         CashMachine cashMachine = new CashMachine();
-        try {
-            int returnedCash = cashMachine.payOut(100);
-            Assertions.assertEquals(100, returnedCash);
-        } catch (Exception e) {
-        }
+        int returnedCash = cashMachine.payOut(100);
+        Assertions.assertEquals(100, returnedCash);
     }
 
     @Test
-    public void shouldNotPayOutToMuch() {
+    public void shouldNotPayOutToMuch() throws Exception {
         CashMachine cashMachine = new CashMachine();
-        int requestedCash = 0;
-        try {
-            requestedCash = cashMachine.payOut(60000);
-        } catch (Exception e) {
-        }
-
+        int requestedCash = cashMachine.payOut(60000);
         Assertions.assertEquals(0, requestedCash);
     }
 
     @Test
-    public void shouldPayOutTwice() {
+    public void shouldPayOutTwice() throws Exception {
         CashMachine cashMachine = new CashMachine();
-        try {
-            int returnedCash = cashMachine.payOut(100);
-            int secondReturnedCash = cashMachine.payOut(100);
+        int returnedCash = cashMachine.payOut(100);
+        int secondReturnedCash = cashMachine.payOut(100);
+        Assertions.assertEquals(100, returnedCash);
+        Assertions.assertEquals(100, secondReturnedCash);
 
-            Assertions.assertEquals(100, returnedCash);
-            Assertions.assertEquals(100, secondReturnedCash);
-        } catch (Exception e) {
-        }
     }
 
     @Test
-    void testExpectedException()  {
+    void testExpectedException() {
 
         ApplicationException thrown = Assertions.assertThrows(ApplicationException.class, () -> {
             CashMachine cashMachine = new CashMachine();
@@ -49,28 +38,29 @@ public class CashMachineTests {
             cashMachine.payOut(30000);
         });
 
-        Assertions.assertEquals("Requested sum is lower than your account balance",thrown.getMessage());
+        Assertions.assertEquals("Requested sum is lower than your account balance", thrown.getMessage());
     }
 
     @Test
     public void shouldNotPauOutNegativeValue() {
-        CashMachine cashMachine = new CashMachine();
-        try {
+        ApplicationException thrown = Assertions.assertThrows(ApplicationException.class, () -> {
+            CashMachine cashMachine = new CashMachine();
             cashMachine.payOut(-100);
-        } catch (Exception e) {
-            return;
-        }
-        Assertions.fail("Exception has not been thrown");
 
+        });
+
+        Assertions.assertEquals("Requested sum is negative or equal 0 ", thrown.getMessage());
     }
 
     @Test
     public void shouldNotPayOutZero() {
         CashMachine cashMachine = new CashMachine();
-        try {
+        ApplicationException thrown = Assertions.assertThrows(ApplicationException.class, () -> {
             int returnedCash = cashMachine.payOut(0);
             Assertions.assertEquals(0, returnedCash);
-        } catch (Exception e) {
-        }
+
+
+
+        });
     }
 }
