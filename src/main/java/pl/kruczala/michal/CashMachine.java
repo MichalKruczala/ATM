@@ -16,8 +16,6 @@ public class CashMachine {
 
     public int payOut(int requestedSum) throws Exception {
 
-
-
         if ((requestedSum <= 0)) {
             throw new ApplicationException("Requested sum is negative or equal 0 ");
         }  if (requestedSum % 200 != 0 && requestedSum % 100 != 0 && requestedSum % 50 != 0 && requestedSum % 20 != 0) {
