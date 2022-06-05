@@ -3,7 +3,6 @@ import pl.kruczala.michal.Authenticator;
 import pl.kruczala.michal.CashMachine;
 import pl.kruczala.michal.User;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ProgramATM {
@@ -26,14 +25,10 @@ public class ProgramATM {
             Scanner scanner = new Scanner(System.in);
             if (tryAuthenticate(scanner)) {
                 CashMachine cashMachine = new CashMachine();
-                System.out.println(ANSI_GREEN + "Hello inside ATM bank");// czemu nie chce żaden kolor w tym miejscu działać?
+                System.out.println(ANSI_GREEN + "Hello inside ATM bank");
 
                 do {
-                    System.out.print("how much money would you get?: ");
-                    int moneyQuantity = scanner.nextInt();
-                    int requestedSum = cashMachine.payOut(moneyQuantity);
-                    System.out.println("-----Successfully pay out " + requestedSum+"------");
-                    System.out.println("Amount  of money on your account " + cashMachine.getAccountBalance());
+                    payOut(scanner, cashMachine);
                 }
                 while (canRepeatView(scanner));
             }
@@ -44,6 +39,19 @@ public class ProgramATM {
         } finally {
             System.out.println(ANSI_YELLOW + ANSI_BLACK_BACKGROUND + "----Thank you for using our services----" + ANSI_RESET);
         }
+    }
+
+    private static void payOut(Scanner scanner, CashMachine cashMachine) throws Exception {
+        try {
+            System.out.print("how much money would you get?: ");
+            int moneyQuantity = scanner.nextInt();
+            int requestedSum = cashMachine.payOut(moneyQuantity);
+            System.out.println("-----Successfully pay out " + requestedSum + "------");
+            System.out.println("Amount  of money on your account " + cashMachine.getAccountBalance());
+        }catch (ApplicationException e){
+            System.out.println(e.getMessage());
+        }
+        ;
     }
 
 
@@ -71,7 +79,7 @@ public class ProgramATM {
         final String ANSI_RESET = "\u001B[0m";
 
         System.out.println("Would you pau out more? or exit ATM bank?");
-        System.out.println("Insert 'c' to continue ,or 'e' to exit bank:");
+        System.out.print("Insert 'c' to continue ,or 'e' to exit bank:");
         switch (scanner.next()) {
             case "c":
                 return true;

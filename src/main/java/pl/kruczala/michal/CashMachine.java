@@ -15,7 +15,6 @@ public class CashMachine {
     }
 
     public int payOut(int requestedSum) throws Exception {
-
         if ((requestedSum <= 0)) {
             throw new ApplicationException("Requested sum is negative or equal 0 ");
         }  if (requestedSum % 200 != 0 && requestedSum % 100 != 0 && requestedSum % 50 != 0 && requestedSum % 20 != 0) {
@@ -23,13 +22,32 @@ public class CashMachine {
         }
         if (requestedSum <= accountBalance) {
             accountBalance = accountBalance - requestedSum;
-
             return requestedSum;
         } else {
             throw new ApplicationException("Requested sum is lower than your account balance");
         }
     }
-
-
 }
+
+//class PayoutResult {
+//    public int successValue;
+//    public String errorMessage;
+//
+//    private PayoutResult(int value, String errorMessage){
+//        successValue = value;
+//        this.errorMessage = errorMessage;
+//    }
+//
+//    public static PayoutResult ForSuccess(int value){
+//        return new PayoutResult(value, null);
+//    }
+//
+//    public static PayoutResult ForError(String reason){
+//        return new PayoutResult(-1, reason);
+//    }
+//
+//    public boolean IsError(){
+//        return this.errorMessage == null;
+//    }
+//}
 
