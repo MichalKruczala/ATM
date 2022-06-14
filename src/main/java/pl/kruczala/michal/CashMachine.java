@@ -4,6 +4,11 @@ public class CashMachine {
     public int getAccountBalance() {
         return accountBalance;
     }
+    public int getRequestedSum() {
+        return requestedSum;
+    }
+
+     public int requestedSum;
 
     private int accountBalance = 50000;
 
@@ -27,6 +32,7 @@ public class CashMachine {
             throw new ApplicationException("Requested sum is lower than your account balance");
         }
     }
+
 }
 
 //class PayoutResult {

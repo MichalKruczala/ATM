@@ -21,16 +21,25 @@ public class ProgramATM {
         final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
         final String BLUE_UNDERLINED = "\033[4;34m";
 
+
         try {
+
             Scanner scanner = new Scanner(System.in);
             if (tryAuthenticate(scanner)) {
                 CashMachine cashMachine = new CashMachine();
                 System.out.println(ANSI_GREEN + "Hello inside ATM bank");
 
                 do {
-                    payOut(scanner, cashMachine);
+                    System.out.print("how much money would you get?: ");
+                    int moneyQuantity = scanner.nextInt();
+                    int requestedSum;
+                    requestedSum= cashMachine.payOut(moneyQuantity);
+                    System.out.println("-----Successfully pay out " + requestedSum+"------");
+                    System.out.println("Amount  of money on your account " + cashMachine.getAccountBalance());
+
                 }
                 while (canRepeatView(scanner));
+
             }
         } catch (ApplicationException e) {
             System.out.println(e.getMessage());
@@ -39,19 +48,6 @@ public class ProgramATM {
         } finally {
             System.out.println(ANSI_YELLOW + ANSI_BLACK_BACKGROUND + "----Thank you for using our services----" + ANSI_RESET);
         }
-    }
-
-    private static void payOut(Scanner scanner, CashMachine cashMachine) throws Exception {
-        try {
-            System.out.print("how much money would you get?: ");
-            int moneyQuantity = scanner.nextInt();
-            int requestedSum = cashMachine.payOut(moneyQuantity);
-            System.out.println("-----Successfully pay out " + requestedSum + "------");
-            System.out.println("Amount  of money on your account " + cashMachine.getAccountBalance());
-        }catch (ApplicationException e){
-            System.out.println(e.getMessage());
-        }
-        ;
     }
 
 
@@ -90,5 +86,7 @@ public class ProgramATM {
                 return canRepeatView(scanner);
         }
     }
+
+
 }
 
