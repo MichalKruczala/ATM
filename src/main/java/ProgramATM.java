@@ -1,7 +1,4 @@
-import pl.kruczala.michal.ApplicationException;
-import pl.kruczala.michal.Authenticator;
-import pl.kruczala.michal.CashMachine;
-import pl.kruczala.michal.User;
+import pl.kruczala.michal.*;
 
 import java.util.Scanner;
 
@@ -35,6 +32,8 @@ public class ProgramATM {
                     int requestedSum;
                     requestedSum= cashMachine.payOut(moneyQuantity);
                     System.out.println("-----Successfully pay out " + requestedSum+"------");
+                    Casket200 casket200 = new Casket200();   // To tu!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    System.out.println(casket200.Casket()); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     System.out.println("Amount  of money on your account " + cashMachine.getAccountBalance());
 
                 }
