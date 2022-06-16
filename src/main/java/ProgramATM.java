@@ -29,12 +29,17 @@ public class ProgramATM {
                 do {
                     System.out.print("how much money would you get?: ");
                     int moneyQuantity = scanner.nextInt();
-                    int requestedSum;
-                    requestedSum= cashMachine.payOut(moneyQuantity);
-                    System.out.println("-----Successfully pay out " + requestedSum+"------");
-                    Casket200 casket200 = new Casket200();   // To tu!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    System.out.println(casket200.Casket()); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                    int requestedSumInMain = cashMachine.payOut(moneyQuantity);
+                    cashMachine.setRequestedSum(requestedSumInMain); // to requested sum to nie requested sum z sash machine pajacu
+                    System.out.println("-----Successfully pay out " + requestedSumInMain+"------");
+
+                    Casket200 casket200 = new Casket200();
+
+                    System.out.print("200zł x ");
+                    System.out.println(casket200.casketPayOut200(requestedSumInMain));
                     System.out.println("Amount  of money on your account " + cashMachine.getAccountBalance());
+
 
                 }
                 while (canRepeatView(scanner));

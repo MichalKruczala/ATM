@@ -2,31 +2,25 @@ package pl.kruczala.michal;
 
 public class Casket200 extends CashMachine {
 
-    Casket200 casket200 = new Casket200();
-
-    int requestedSum = casket200.getRequestedSum();
-    int accountBalance = casket200.getAccountBalance();
+    int accountBalance = getAccountBalance();
     int numberOf200BanknotesInCasket = 50;
     int usedNumberOf200BanknotesToPayOut = 0;
-    int restOfRequestedSum;
 
-    public int Casket(){
+
+    public int getUsedNumberOf200BanknotesToPayOut() {
+        return usedNumberOf200BanknotesToPayOut;
+    }
+
+    public int casketPayOut200(int requestedSumInMain) {
         do {
-
-            accountBalance = accountBalance - 200;
-            requestedSum = requestedSum - 200;
+           // accountBalance = accountBalance - 200;  account balance sprawdza mi metoda  PayOut z cashMachine
+            requestedSumInMain = requestedSumInMain - 200;
             numberOf200BanknotesInCasket = numberOf200BanknotesInCasket - 1;
             usedNumberOf200BanknotesToPayOut = usedNumberOf200BanknotesToPayOut + 1;
 
-
-        } while (requestedSum < 200 && numberOf200BanknotesInCasket >= 0);
-       requestedSum = restOfRequestedSum;
-       return restOfRequestedSum;
+        } while (requestedSumInMain >= 200 && numberOf200BanknotesInCasket >= 0);
+        return usedNumberOf200BanknotesToPayOut;
     }
 
-    //dla próby w chwili wypłacenia próbuję wyświetlić ile jest tej reszty ale wywala bła StackOverflowError
-  //  potem restOfRequestedSum będę przekazywał do następnych kasetek
-
-
-
 }
+
