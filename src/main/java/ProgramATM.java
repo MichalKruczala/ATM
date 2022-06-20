@@ -20,7 +20,6 @@ public class ProgramATM {
 
 
         try {
-
             Scanner scanner = new Scanner(System.in);
             if (tryAuthenticate(scanner)) {
                 CashMachine cashMachine = new CashMachine();
@@ -31,15 +30,12 @@ public class ProgramATM {
                     int moneyQuantity = scanner.nextInt();
 
                     int requestedSumInMain = cashMachine.payOut(moneyQuantity);
-                    cashMachine.setRequestedSum(requestedSumInMain); // to requested sum to nie requested sum z sash machine pajacu
-                    System.out.println("-----Successfully pay out " + requestedSumInMain+"------");
+                    // cashMachine.setRequestedSum(requestedSumInMain); // to requested sum to nie requested sum z sash machine pajacu
+                    System.out.println("-----Successfully pay out " + requestedSumInMain + "------");
 
-                    Casket200 casket200 = new Casket200();
+                    CasketShit(requestedSumInMain);
 
-                    System.out.print("200zł x ");
-                    System.out.println(casket200.casketPayOut200(requestedSumInMain));
                     System.out.println("Amount  of money on your account " + cashMachine.getAccountBalance());
-
 
                 }
                 while (canRepeatView(scanner));
@@ -52,6 +48,27 @@ public class ProgramATM {
         } finally {
             System.out.println(ANSI_YELLOW + ANSI_BLACK_BACKGROUND + "----Thank you for using our services----" + ANSI_RESET);
         }
+    }
+
+    private static void CasketShit(int requestedSumInMain) {
+        Casket200 casket200 = new Casket200();
+        System.out.print("200zł x ");
+        int a = casket200.casketPayOut200(requestedSumInMain);
+        System.out.println(a);
+        int restOfRequestedSumInMain = requestedSumInMain - 200 * a;
+        Casket100 casket100 = new Casket100();
+        System.out.print("100zł x ");
+        int b = casket100.casketPayOut100(restOfRequestedSumInMain);
+        System.out.println(b);
+        Casket50 casket50 = new Casket50();
+        int nextRestOfRequestedSumInMain = restOfRequestedSumInMain - 100 * b;
+        System.out.print("50zł x ");
+        int c = casket50.casketPayOut50(nextRestOfRequestedSumInMain);
+        System.out.println(c);
+        int nextNextRestOfRequestedSumInMain = nextRestOfRequestedSumInMain - 50 * c;
+        Casket20 casket20 = new Casket20();
+        System.out.print("20zł x ");
+        System.out.println(casket20.casketPayOut20(nextNextRestOfRequestedSumInMain));
     }
 
 

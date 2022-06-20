@@ -8,10 +8,7 @@ public class CashMachine {
     }
 
 
-
-   // public int requestedSum;  //to requested sum to nie to z main..
-
-
+    // public int requestedSum;  //to requested sum to nie to z main..
 
 
     public int getRequestedSum() {
@@ -22,7 +19,6 @@ public class CashMachine {
         this.requestedSum = requestedSum;
 
     }
-
 
 
     private int accountBalance = 50000;
@@ -38,7 +34,10 @@ public class CashMachine {
         if ((requestedSum <= 0)) {
             throw new ApplicationException("Requested sum is negative or equal 0 ");
         }
-        if (requestedSum % 200 != 0 && requestedSum % 100 != 0 && requestedSum % 50 != 0 && requestedSum % 20 != 0) {
+        if (requestedSum % 50 != 0 && requestedSum % 20 != 0 &&
+                requestedSum % 70 != 0 && requestedSum % 170 != 0 && requestedSum % 270 != 0 && requestedSum % 370 != 0 &&
+                requestedSum % 470 != 0 && requestedSum % 570 != 0 && requestedSum % 670 != 0 && requestedSum % 770 != 0 &&
+                requestedSum % 870 != 0 && requestedSum % 970 != 0) {
             throw new ApplicationException("Can't pay out demanded amount of money, available banknotes: 200/100/50/20");
         }
         if (requestedSum <= accountBalance) {
