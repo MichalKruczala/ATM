@@ -1,5 +1,6 @@
 import pl.kruczala.michal.*;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ProgramATM {
@@ -29,12 +30,14 @@ public class ProgramATM {
                     System.out.print("how much money would you get?: ");
                     int moneyQuantity = scanner.nextInt();
 
-                    int requestedSumInMain = cashMachine.payOut(moneyQuantity);
-                    // cashMachine.setRequestedSum(requestedSumInMain); // to requested sum to nie requested sum z sash machine pajacu
-                    System.out.println("-----Successfully pay out " + requestedSumInMain + "------");
+                    ArrayList<PayOutResult> payOutResult1 = cashMachine.payOut(moneyQuantity);
+                    // cashMachine.setRequestedSum(requestedSum); // to requested sum to nie requested sum z sash machine pajacu
+                    System.out.println("-----Successfully pay out " + moneyQuantity+ "------");
 
-                    CasketShit(requestedSumInMain);
-
+                    ArrayList<PayOutResult> payOutResult = CasketShit(moneyQuantity);
+                    for (PayOutResult e : payOutResult) {
+                        System.out.println(e.toString());
+                    }
                     System.out.println("Amount  of money on your account " + cashMachine.getAccountBalance());
 
                 }
@@ -50,26 +53,30 @@ public class ProgramATM {
         }
     }
 
-    private static void CasketShit(int requestedSumInMain) {
-        Casket200 casket200 = new Casket200();
-        System.out.print("200zł x ");
-        int a = casket200.casketPayOut200(requestedSumInMain);
-        System.out.println(a);
-        int restOfRequestedSumInMain = requestedSumInMain - 200 * a;
-        Casket100 casket100 = new Casket100();
-        System.out.print("100zł x ");
-        int b = casket100.casketPayOut100(restOfRequestedSumInMain);
-        System.out.println(b);
-        Casket50 casket50 = new Casket50();
+    private static ArrayList<PayOutResult> CasketShit(int requestedSum) throws ApplicationException {
+        Casket casket200 = new Casket(200);
+        int a = casket200.getBanknotes(requestedSum);
+
+        int restOfRequestedSumInMain = requestedSum - 200 * a;
+        Casket casket100 = new Casket(100);
+        int b = casket100.getBanknotes(restOfRequestedSumInMain);
+
+        Casket casket50 = new Casket(50);
         int nextRestOfRequestedSumInMain = restOfRequestedSumInMain - 100 * b;
-        System.out.print("50zł x ");
-        int c = casket50.casketPayOut50(nextRestOfRequestedSumInMain);
-        System.out.println(c);
+        int c = casket50.getBanknotes(nextRestOfRequestedSumInMain);
+
         int nextNextRestOfRequestedSumInMain = nextRestOfRequestedSumInMain - 50 * c;
-        Casket20 casket20 = new Casket20();
-        System.out.print("20zł x ");
-        System.out.println(casket20.casketPayOut20(nextNextRestOfRequestedSumInMain));
+        Casket casket20 = new Casket(20);
+        int d = casket20.getBanknotes(nextNextRestOfRequestedSumInMain);
+        ArrayList<PayOutResult> banknotesUsed = new ArrayList<>();
+        banknotesUsed.add(new PayOutResult(200, a));
+        banknotesUsed.add(new PayOutResult(100, b));
+        banknotesUsed.add(new PayOutResult(50, c));
+        banknotesUsed.add(new PayOutResult(20, d));
+
+        return banknotesUsed;
     }
+
 
 
     private static boolean tryAuthenticate(Scanner scanner) {
@@ -110,4 +117,6 @@ public class ProgramATM {
 
 
 }
+
+
 

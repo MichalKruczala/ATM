@@ -1,75 +1,49 @@
 package pl.kruczala.michal;
 
+import java.util.ArrayList;
+
 public class CashMachine {
-    private int requestedSum;
-
-    public int getAccountBalance() {
-        return accountBalance;
-    }
-
-
-    // public int requestedSum;  //to requested sum to nie to z main..
-
-
-    public int getRequestedSum() {
-        return this.requestedSum;
-    }
-
-    public void setRequestedSum(int requestedSum) {
-        this.requestedSum = requestedSum;
-
-    }
-
-
-    private int accountBalance = 50000;
+    ArrayList<Casket> caskets = new ArrayList<>();
 
     public CashMachine() {
+        caskets.add(new Casket(200));
+        caskets.add(new Casket(100));
+        caskets.add(new Casket(50));
+        caskets.add(new Casket(20));
     }
 
-    public void setAccountBalance(int accountBalance) { //będziemy ustawiać ilość hajsu na koncie
-        this.accountBalance = accountBalance;
-    }
+    public int getAccountBalance(){
 
-    public int payOut(int requestedSum) throws Exception {
+        int sum = 0;
+        for (Casket casket:caskets) {
+            sum = sum + casket.getCasketBalance();
+        }
+
+        return sum;
+    }
+    public boolean canPayOut(int requestedSum){
+        int currentSun = requestedSum;
+        for (Casket casket: this.caskets) {
+            int howMuchMoneyCanGet = casket.howMuchMoneyCanGet(currentSun);
+            currentSun = currentSun - howMuchMoneyCanGet;
+        }
+        return currentSun == 0;
+    }
+    public ArrayList<PayOutResult> payOut(int requestedSum) throws Exception {
         if ((requestedSum <= 0)) {
             throw new ApplicationException("Requested sum is negative or equal 0 ");
         }
-        if (requestedSum % 50 != 0 && requestedSum % 20 != 0 &&
-                requestedSum % 70 != 0 && requestedSum % 170 != 0 && requestedSum % 270 != 0 && requestedSum % 370 != 0 &&
-                requestedSum % 470 != 0 && requestedSum % 570 != 0 && requestedSum % 670 != 0 && requestedSum % 770 != 0 &&
-                requestedSum % 870 != 0 && requestedSum % 970 != 0) {
+        if (!canPayOut(requestedSum)) {
             throw new ApplicationException("Can't pay out demanded amount of money, available banknotes: 200/100/50/20");
         }
-        if (requestedSum <= accountBalance) {
-            accountBalance = accountBalance - requestedSum;
-            setRequestedSum(requestedSum);
-            return requestedSum;
-        } else {
-            throw new ApplicationException("Requested sum is lower than your account balance");
+        ArrayList<PayOutResult> result = new ArrayList<>();
+
+        int currentSun = requestedSum;
+        for (Casket casket: this.caskets) {
+            int howMuchMoneyCanGet = casket.getBanknotes(currentSun);
+            currentSun = currentSun - howMuchMoneyCanGet;
+            result.add(new PayOutResult(casket.nominal,howMuchMoneyCanGet));
         }
+        return result;
     }
-
 }
-
-//class PayoutResult {
-//    public int successValue;
-//    public String errorMessage;
-//
-//    private PayoutResult(int value, String errorMessage){
-//        successValue = value;
-//        this.errorMessage = errorMessage;
-//    }
-//
-//    public static PayoutResult ForSuccess(int value){
-//        return new PayoutResult(value, null);
-//    }
-//
-//    public static PayoutResult ForError(String reason){
-//        return new PayoutResult(-1, reason);
-//    }
-//
-//    public boolean IsError(){
-//        return this.errorMessage == null;
-//    }
-//}
-
