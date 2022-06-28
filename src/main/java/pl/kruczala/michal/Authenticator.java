@@ -6,7 +6,9 @@ import java.util.Optional;
 public class Authenticator {
 
     private ArrayList<User> usersInSystem;
-
+    public ArrayList<User> getUsersInSystem(){
+        return this.usersInSystem;
+    }
 
     public Authenticator() {
 

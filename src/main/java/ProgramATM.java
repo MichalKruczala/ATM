@@ -19,10 +19,13 @@ public class ProgramATM {
         final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
         final String BLUE_UNDERLINED = "\033[4;34m";
 
-
         try {
             Scanner scanner = new Scanner(System.in);
             if (tryAuthenticate(scanner)) {
+               // if (User.isAdmin(scanner,s)){
+                //    System.out.println("siema adminie");
+               // }
+
                 CashMachine cashMachine = new CashMachine();
                 System.out.println(ANSI_GREEN + "Hello inside ATM bank");
 
@@ -77,8 +80,6 @@ public class ProgramATM {
         return banknotesUsed;
     }
 
-
-
     private static boolean tryAuthenticate(Scanner scanner) {
         final String RED_UNDERLINED = "\033[4;31m";
         final String ANSI_RED = "\u001B[31m";
@@ -94,6 +95,9 @@ public class ProgramATM {
         if (user == null) {
             System.out.println(ANSI_RED + RED_UNDERLINED + "------Wrong credentials------" + ANSI_RESET);
             return false;
+        }if(user.isAdmin){                                          //
+            Authenticator authenticator1 = new Authenticator();     //
+            System.out.println(authenticator1.getUsersInSystem());  //
         }
         return true;
     }
