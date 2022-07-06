@@ -24,7 +24,7 @@ public class Authenticator {
     public User tryAunthenticate(String login, String password) {
 
         Optional<User> opcjonalna =
-        usersInSystem.stream().filter(user -> user.login.equals(login) && user.password.equals(password)).findAny();
+                usersInSystem.stream().filter(user -> user.login.equals(login) && user.password.equals(password)).findAny();
         if (opcjonalna.isEmpty()){
             return null;
         }

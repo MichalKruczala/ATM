@@ -1,4 +1,5 @@
 import pl.kruczala.michal.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,9 +23,9 @@ public class ProgramATM {
         try {
             Scanner scanner = new Scanner(System.in);
             if (tryAuthenticate(scanner)) {
-               // if (User.isAdmin(scanner,s)){
+                // if (User.isAdmin(scanner,s)){
                 //    System.out.println("siema adminie");
-               // }
+                // }
 
                 CashMachine cashMachine = new CashMachine();
                 System.out.println(ANSI_GREEN + "Hello inside ATM bank");
@@ -32,20 +33,17 @@ public class ProgramATM {
                 do {
                     System.out.print("how much money would you get?: ");
                     int moneyQuantity = scanner.nextInt();
+                    Quantum quantum =new Quantum(moneyQuantity);
 
-                    ArrayList<PayOutResult> payOutResult1 = cashMachine.payOut(moneyQuantity);
-                    // cashMachine.setRequestedSum(requestedSum); // to requested sum to nie requested sum z sash machine pajacu
-                    System.out.println("-----Successfully pay out " + moneyQuantity+ "------");
-
-                    ArrayList<PayOutResult> payOutResult = CasketShit(moneyQuantity);
-                    for (PayOutResult e : payOutResult) {
+                    ArrayList<PayOutResult> payOutResult1 = cashMachine.payOut(quantum);
+                    for (PayOutResult e : payOutResult1) {
                         System.out.println(e.toString());
                     }
+
                     System.out.println("Amount  of money on your account " + cashMachine.getAccountBalance());
 
                 }
                 while (canRepeatView(scanner));
-
             }
         } catch (ApplicationException e) {
             System.out.println(e.getMessage());
@@ -54,30 +52,6 @@ public class ProgramATM {
         } finally {
             System.out.println(ANSI_YELLOW + ANSI_BLACK_BACKGROUND + "----Thank you for using our services----" + ANSI_RESET);
         }
-    }
-
-    private static ArrayList<PayOutResult> CasketShit(int requestedSum) throws ApplicationException {
-        Casket casket200 = new Casket(200);
-        int a = casket200.getBanknotes(requestedSum);
-
-        int restOfRequestedSumInMain = requestedSum - 200 * a;
-        Casket casket100 = new Casket(100);
-        int b = casket100.getBanknotes(restOfRequestedSumInMain);
-
-        Casket casket50 = new Casket(50);
-        int nextRestOfRequestedSumInMain = restOfRequestedSumInMain - 100 * b;
-        int c = casket50.getBanknotes(nextRestOfRequestedSumInMain);
-
-        int nextNextRestOfRequestedSumInMain = nextRestOfRequestedSumInMain - 50 * c;
-        Casket casket20 = new Casket(20);
-        int d = casket20.getBanknotes(nextNextRestOfRequestedSumInMain);
-        ArrayList<PayOutResult> banknotesUsed = new ArrayList<>();
-        banknotesUsed.add(new PayOutResult(200, a));
-        banknotesUsed.add(new PayOutResult(100, b));
-        banknotesUsed.add(new PayOutResult(50, c));
-        banknotesUsed.add(new PayOutResult(20, d));
-
-        return banknotesUsed;
     }
 
     private static boolean tryAuthenticate(Scanner scanner) {
@@ -95,7 +69,8 @@ public class ProgramATM {
         if (user == null) {
             System.out.println(ANSI_RED + RED_UNDERLINED + "------Wrong credentials------" + ANSI_RESET);
             return false;
-        }if(user.isAdmin){                                          //
+        }
+        if (user.isAdmin) {                                          //
             Authenticator authenticator1 = new Authenticator();     //
             System.out.println(authenticator1.getUsersInSystem());  //
         }
@@ -121,6 +96,7 @@ public class ProgramATM {
 
 
 }
+
 
 
 
