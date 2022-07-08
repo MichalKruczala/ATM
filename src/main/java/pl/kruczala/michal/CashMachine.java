@@ -29,21 +29,22 @@ public class CashMachine {
         }
         return currentSun == 0;
     }
-    public ArrayList<PayOutResult> payOut(int requestedSum) throws Exception {
-        if ((requestedSum <= 0)) {
-            throw new ApplicationException("Requested sum is negative or equal 0 ");
-        }
-        if (!canPayOut(requestedSum)) {
-            throw new ApplicationException("Can't pay out demanded amount of money, available banknotes: 200/100/50/20");
-        }
+    public ArrayList<PayOutResult> payOut(Quantum requestedSum) throws Exception {
+
         ArrayList<PayOutResult> result = new ArrayList<>();
 
-        int currentSun = requestedSum;
+        int currentSun = requestedSum.toInt();
+
+        BlaBlaBla bla = new BlaBlaBla();
+        bla.calculate(currentSun, caskets);
+
+
         for (Casket casket: this.caskets) {
-            int howMuchMoneyCanGet = casket.getBanknotes(currentSun);
-            currentSun = currentSun - howMuchMoneyCanGet;
-            result.add(new PayOutResult(casket.nominal,howMuchMoneyCanGet));
+            int banknotes = casket.getBanknotes(currentSun);
+            currentSun = currentSun - casket.resolveForBanknotes(banknotes);
+            result.add(new PayOutResult(casket.nominal,banknotes));
         }
         return result;
     }
+
 }

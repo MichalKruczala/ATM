@@ -27,4 +27,8 @@ public class Casket {
     public int howMuchMoneyCanGet(int requestedSum){
         return howManyBanknotesCanGet(requestedSum)*nominal;
     }
+    public int resolveForBanknotes(int count){
+        return count*nominal;
+    }
+
 }

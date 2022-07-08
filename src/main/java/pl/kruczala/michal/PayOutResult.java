@@ -19,7 +19,7 @@ public class PayOutResult {
 
     @Override
     public String toString() {
-        return getNominal() + " zĹ‚ x " + getQuantity();
+        return getNominal() + " złotych x " + getQuantity();
     }
 }
 

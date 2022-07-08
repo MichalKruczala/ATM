@@ -25,7 +25,8 @@ public class User {
     }
 
     //to jest metoda wytwórcza,na rozmowie pytają :)
-    public static User asAdmin(String login, String password){
+    public static User isAdmin(String login, String password){
+
         return new User(login,password,true);
     }
 
