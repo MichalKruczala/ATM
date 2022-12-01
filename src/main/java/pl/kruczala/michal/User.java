@@ -24,7 +24,6 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    //to jest metoda wytwórcza,na rozmowie pytają :)
     public static User isAdmin(String login, String password){
 
         return new User(login,password,true);
