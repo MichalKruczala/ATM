@@ -1,26 +1,29 @@
 package pl.kruczala.michal;
 
+import org.springframework.stereotype.Component;
+import pl.kruczala.michal.exceptions.ApplicationException;
+
 import java.util.*;
 
 class BanknotesIterator {
     private Iterator<Banknotes> iterator;
     public Banknotes current;
 
-    BanknotesIterator(Iterator<Banknotes> iterator){
+    BanknotesIterator(Iterator<Banknotes> iterator) {
         this.iterator = iterator;
     }
 
-    public boolean hasNext(){
+    public boolean hasNext() {
         return iterator.hasNext();
     }
 
-    public BanknotesIterator moveNext(){
+    public BanknotesIterator moveNext() {
         this.current = iterator.next();
         return this;
     }
 
     public BanknotesIterator moveTo20() {
-        if(current.nominal == 20){
+        if (current.nominal == 20) {
             return this;
         }
 
@@ -55,17 +58,17 @@ class Banknotes {
     }
 }
 
-public class BlaBlaBla {
+public class Bank {
     public ArrayList<PayOutResult> calculate(int requestedSum, ArrayList<Casket> caskets) throws ApplicationException {
         List<Banknotes> list = caskets.stream()
                 .map(x -> new Banknotes(x.nominal, x.numberOfBanknotesInCasket))
                 .toList();
 
         boolean result = calculate(requestedSum, new BanknotesIterator(list.iterator()));
-        if(!result) {
+        if (!result) {
             throw new ApplicationException("cannot payout requestedSum");
         }
-        return new ArrayList<PayOutResult>(list.stream().map(x -> x.toPayoutResult()).toList());
+        return new ArrayList<>(list.stream().map(x -> x.toPayoutResult()).toList());
     }
 
     private boolean calculate(int requestedSum, BanknotesIterator iterator) throws ApplicationException {
@@ -76,13 +79,13 @@ public class BlaBlaBla {
             return false;
         }
 
-        if(iterator.current == null) {
+        if (iterator.current == null) {
             iterator.moveNext();
         }
 
         Banknotes banknotes = iterator.current;
 
-        if(!banknotes.canTake()){
+        if (!banknotes.canTake()) {
             return calculate(requestedSum, iterator.moveNext());
         }
 
@@ -97,7 +100,7 @@ public class BlaBlaBla {
             return calculate(requestedSum, iterator);
         }
 
-        if(!iterator.hasNext()){
+        if (!iterator.hasNext()) {
             return false;
         }
 

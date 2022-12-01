@@ -1,9 +1,10 @@
 package pl.kruczala.michal.db;
 
-import pl.kruczala.michal.User;
+import org.springframework.stereotype.Component;
+import pl.kruczala.michal.model.User;
 
 import java.util.ArrayList;
-
+@Component
 public class UserDB {
     private final ArrayList<User> usersInSystem;
 
@@ -12,7 +13,7 @@ public class UserDB {
     }
 
     public UserDB() {
-        this.usersInSystem = new ArrayList<User>();
+        this.usersInSystem = new ArrayList<>();
         usersInSystem.add(new User("123", "f77fe34c4c360ccb53e2ed84d246965e"));
         usersInSystem.add(new User("admin", "c037c93bf16b63ce908b98e280ccffef", true));
         usersInSystem.add(new User("jareczek", "c3b5059804dbcc59bc4daaf93585a3a6"));

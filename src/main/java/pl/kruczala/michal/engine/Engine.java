@@ -1,26 +1,38 @@
+package pl.kruczala.michal.engine;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pl.kruczala.michal.*;
 import pl.kruczala.michal.authenticator.Authenticator;
 import pl.kruczala.michal.gui.GUI;
+import pl.kruczala.michal.prividers.OptionsProvider;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ProgramATM {
-    public static void main(String[] args) {
+@Component
+public class Engine {
+    @Autowired
+    CashMachine cashMachine;
+    @Autowired
+    GUI gui;
+    @Autowired
+    Authenticator authenticator;
+    @Autowired
+    OptionsProvider optionsProvider;
+    @Autowired
+    Quantum quantum;
 
-        CashMachine cashMachine = new CashMachine();
-        GUI gui = new GUI();
-        Authenticator authenticator = new Authenticator();
-        OptionsProvider optionsProvider = new OptionsProvider();
-
+    public void start() {
         try {
             while (authenticator.tryAuthenticate()) {
                 gui.printHello();
                 do {
                     gui.askUserRorQuantity();
                     int moneyQuantity = optionsProvider.readInt();
-                    Quantum quantum = new Quantum(moneyQuantity);
+                    quantum.setRequestedSum(moneyQuantity);
 
+                    //  Quantum quantum = new Quantum(moneyQuantity);
                     ArrayList<PayOutResult> payOutResult1 = cashMachine.payOut(quantum);
                     for (PayOutResult e : payOutResult1) {
                         System.out.println(e.toString());
@@ -35,10 +47,7 @@ public class ProgramATM {
             gui.printEND();
         }
     }
-
-    private static boolean canRepeatView() throws IOException {
-        OptionsProvider optionsProvider = new OptionsProvider();
-        GUI gui = new GUI();
+    private boolean canRepeatView() throws IOException {
         gui.printContinueOrExit();
         switch (optionsProvider.readChar()) {
             case 'c':
@@ -50,8 +59,6 @@ public class ProgramATM {
                 return canRepeatView();
         }
     }
-
-
 }
 
 

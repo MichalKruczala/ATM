@@ -3,6 +3,7 @@ package pl.kruczala.michal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pl.kruczala.michal.authenticator.Authenticator;
+import pl.kruczala.michal.model.User;
 
 public class AuthenticotorTests {
     @Test

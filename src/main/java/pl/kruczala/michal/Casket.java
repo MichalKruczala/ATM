@@ -18,7 +18,7 @@ public class Casket {
         }
         return usedNumberOfBanknotesToPayOut;
     }
-    public int getBanknotes(int requestedSum) throws ApplicationException {
+    public int getBanknotes(int requestedSum) {
         int banknotes = howManyBanknotesCanGet(requestedSum);
         this.numberOfBanknotesInCasket = this.numberOfBanknotesInCasket - banknotes;
         return banknotes;

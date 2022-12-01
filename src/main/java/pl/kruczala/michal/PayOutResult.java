@@ -1,8 +1,8 @@
 package pl.kruczala.michal;
 
 public class PayOutResult {
-    private int nominal;
-    private int quantity;
+    private final int nominal;
+    private final int quantity;
 
     public PayOutResult(int nominal, int quantity) {
         this.nominal = nominal;

@@ -1,4 +1,4 @@
-package pl.kruczala.michal;
+package pl.kruczala.michal.prividers;
 
 import java.io.BufferedReader;
 import java.io.IOException;

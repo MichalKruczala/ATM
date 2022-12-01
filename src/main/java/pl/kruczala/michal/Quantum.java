@@ -1,10 +1,23 @@
 package pl.kruczala.michal;
 
+import org.springframework.stereotype.Component;
+import pl.kruczala.michal.exceptions.ApplicationException;
+@Component
 public class Quantum {
+    public int getRequestedSum() {
+        return requestedSum;
+    }
+
+    public void setRequestedSum(int requestedSum) {
+        this.requestedSum = requestedSum;
+    }
+
+    private int requestedSum;
     private final int value;
 
-    public Quantum(int requestedSum) throws ApplicationException {
-        this.value = requestedSum;
+    public Quantum() throws ApplicationException {
+
+        this.value = this.requestedSum;
         if ((requestedSum <= 0)) {
             throw new ApplicationException("Requested sum is negative or equal 0 ");
         }
@@ -50,7 +63,6 @@ public class Quantum {
         if (o instanceof Quantum c) {
             return this.value == c.value;
         }
-
         return false;
     }
 }

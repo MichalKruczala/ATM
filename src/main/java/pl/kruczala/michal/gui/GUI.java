@@ -1,27 +1,19 @@
 package pl.kruczala.michal.gui;
 
-import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pl.kruczala.michal.CashMachine;
-import pl.kruczala.michal.OptionsProvider;
 
-import java.io.IOException;
-import java.util.Scanner;
-
+@Component
 public class GUI {
-    CashMachine cashMachine = new CashMachine();
-    Scanner scanner = new Scanner(System.in);
-    OptionsProvider optionsProvider = new OptionsProvider();
+    @Autowired
+    CashMachine cashMachine;
+
     final String ANSI_RESET = "\u001B[0m";
-    final String ANSI_BLACK = "\u001B[30m";
-    final String ANSI_RED = "\u001B[31m";
     final String ANSI_GREEN = "\u001B[32m";
     final String ANSI_YELLOW = "\u001B[33m";
-    final String ANSI_BLUE = "\u001B[34m";
-    final String ANSI_PURPLE = "\u001B[35m";
-    final String ANSI_CYAN = "\u001B[36m";
-    final String ANSI_WHITE = "\u001B[37m";
     final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
-    final String BLUE_UNDERLINED = "\033[4;34m";
+
 
     public void printHello() {
         System.out.println(ANSI_GREEN + "Hello inside ATM bank");
